@@ -5,6 +5,7 @@
 #include "guis/GuiMsgBox.h"
 #include "utils/FileSystemUtil.h"
 #include "views/ViewController.h"
+#include "AudioManager.h"
 #include "CollectionSystemManager.h"
 #include "EmulationStation.h"
 #include "InputManager.h"
@@ -383,6 +384,10 @@ int main(int argc, char* argv[])
 
 	//generate joystick events since we're done loading
 	SDL_JoystickEventState(SDL_ENABLE);
+		
+	// RetroPie BGM
+	AudioManager::getInstance()->init();
+	AudioManager::getInstance()->playRandomMusic();
 
 	int lastTime = SDL_GetTicks();
 	int ps_time = SDL_GetTicks();
