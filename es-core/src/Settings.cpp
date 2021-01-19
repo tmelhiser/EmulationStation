@@ -72,6 +72,7 @@ void Settings::setDefaults()
 
 	mBoolMap["EnableSounds"] = true;
 	mBoolMap["EnableMusic"] = true;
+	mIntMap["MusicVolume"] = 128;
 	mBoolMap["ShowHelpPrompts"] = true;
 	mBoolMap["ScrapeRatings"] = true;
 	mBoolMap["IgnoreGamelist"] = false;
