@@ -66,6 +66,7 @@ std::shared_ptr<TextureData> TextureDataManager::get(const TextureResource* key,
 		if (enableLoading && !tex->isLoaded())
 			load(tex);
 	}
+
 	return tex;
 }
 
