@@ -412,19 +412,21 @@ int main(int argc, char* argv[])
 
 		if(ps_standby ? SDL_WaitEventTimeout(&event, PowerSaver::getTimeout()) : SDL_PollEvent(&event))
 		{
+			// PowerSaver can push events to exit SDL_WaitEventTimeout immediatly
+			// Reset this event's state
+			PowerSaver::resetRefreshEvent();
+
 			do
 			{
 				InputManager::getInstance()->parseEvent(event, &window);
-
-				if(event.type == SDL_QUIT)
+				if (event.type == SDL_QUIT)
 					running = false;
-			} while(SDL_PollEvent(&event));
-
+			} 
+			while(SDL_PollEvent(&event));
 			// triggered if exiting from SDL_WaitEvent due to event
 			if (ps_standby)
 				// show as if continuing from last event
 				lastTime = SDL_GetTicks();
-
 			// reset counter
 			ps_time = SDL_GetTicks();
 		}
@@ -432,20 +434,17 @@ int main(int argc, char* argv[])
 		{
 			// If exitting SDL_WaitEventTimeout due to timeout. Trail considering
 			// timeout as an event
-			ps_time = SDL_GetTicks();
+		//	ps_time = SDL_GetTicks();
 		}
-
 		if(window.isSleeping())
 		{
 			lastTime = SDL_GetTicks();
 			SDL_Delay(1); // this doesn't need to be accurate, we're just giving up our CPU time until something wakes us up
 			continue;
 		}
-
 		int curTime = SDL_GetTicks();
 		int deltaTime = curTime - lastTime;
 		lastTime = curTime;
-
 		// cap deltaTime if it ever goes negative
 		if(deltaTime < 0)
 			deltaTime = 1000;
