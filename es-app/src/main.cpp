@@ -389,8 +389,8 @@ int main(int argc, char* argv[])
 	}
 
 	// flush any queued events before showing the UI and starting the input handling loop
-			SDL_JOYAXISMOTION, SDL_JOYBALLMOTION, SDL_JOYHATMOTION, SDL_JOYBUTTONDOWN, SDL_JOYBUTTONUP,
 	const Uint32 event_list[] = {
+			SDL_JOYAXISMOTION, SDL_JOYBALLMOTION, SDL_JOYHATMOTION, SDL_JOYBUTTONDOWN, SDL_JOYBUTTONUP,
 			SDL_KEYDOWN, SDL_KEYUP
 		};
 	SDL_PumpEvents();
